@@ -2,3 +2,5 @@
 secrets/
 pihole/etc-pihole/
 pihole/etc-dnsmasq.d/
+pihole/etc-pihole/
+pihole/etc-dnsmasq.d/
