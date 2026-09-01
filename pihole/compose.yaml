@@ -1,0 +1,44 @@
+services:
+  unbound:
+    image: mvance/unbound-rpi:1.22.0
+    container_name: unbound
+    restart: unless-stopped
+    hostname: unbound
+    networks: [dns]
+    volumes:
+      - ./unbound:/opt/unbound/etc/unbound/custom.conf.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "drill @127.0.0.1 pi-hole.net || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  pihole:
+    image: pihole/pihole:2025.02.2
+    container_name: pihole
+    restart: unless-stopped
+    depends_on:
+      unbound:
+        condition: service_started
+    networks: [dns]
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8081:80/tcp"
+    environment:
+      TZ: 'Europe/Lisbon'
+      FTLCONF_webserver_api_password: 'REMOVIDO'
+      FTLCONF_dns_upstreams: 'unbound#53'
+      FTLCONF_dns_listeningMode: 'all'
+      FTLCONF_database_maxDBdays: '7'
+      FTLCONF_misc_etc_dnsmasq_d: 'true'
+    volumes:
+      - ./etc-pihole:/etc/pihole
+      - ./etc-dnsmasq.d:/etc/dnsmasq.d
+    cap_add:
+      - SYS_NICE
+    mem_limit: 512m
+
+networks:
+  dns:
+    driver: bridge
