@@ -1,0 +1,29 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - /srv/dev-disk-by-uuid-d9adc1b3-9d62-46d5-894b-88e1aba73c45/docker/appdata/homepage:/app/config
+      - /srv/dev-disk-by-uuid-d9adc1b3-9d62-46d5-894b-88e1aba73c45/docker/appdata/homepage/images:/app/public/images
+    environment:
+      - TZ=Europe/Lisbon
+      - PUID=1000
+      - PGID=1000
+      - HOMEPAGE_ALLOWED_HOSTS=192.168.50.242:3000
+    depends_on:
+      - socket-proxy
+
+  socket-proxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest
+    container_name: homepage-socket-proxy
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - CONTAINERS=1
+      - SERVICES=1
+      - TASKS=1
+      - POST=0
