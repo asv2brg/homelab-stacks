@@ -8,6 +8,8 @@ services:
     volumes:
       - /srv/dev-disk-by-uuid-d9adc1b3-9d62-46d5-894b-88e1aba73c45/docker/appdata/homepage:/app/config
       - /srv/dev-disk-by-uuid-d9adc1b3-9d62-46d5-894b-88e1aba73c45/docker/appdata/homepage/images:/app/public/images
+    env_file:
+      - .env
     environment:
       - TZ=Europe/Lisbon
       - PUID=1000
