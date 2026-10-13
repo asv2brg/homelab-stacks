@@ -15,7 +15,7 @@ services:
       - SYNC_GRAVITY_CLIENT=true
       - SYNC_GRAVITY_CLIENT_BY_GROUP=true
       - RUN_GRAVITY=true
-      - CRON=0 * * * *
+      - CRON=30 4 * * *
       - TZ=Europe/Lisbon
     env_file:
       - .env

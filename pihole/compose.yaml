@@ -27,7 +27,6 @@ services:
       - "8081:80/tcp"
     environment:
       TZ: 'Europe/Lisbon'
-      FTLCONF_webserver_api_password: 'REMOVIDO'
       FTLCONF_dns_upstreams: 'unbound#53'
       FTLCONF_dns_listeningMode: 'all'
       FTLCONF_database_maxDBdays: '7'
