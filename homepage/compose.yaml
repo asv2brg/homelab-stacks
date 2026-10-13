@@ -14,7 +14,7 @@ services:
       - TZ=Europe/Lisbon
       - PUID=1000
       - PGID=1000
-      - HOMEPAGE_ALLOWED_HOSTS=192.168.50.242:3000
+      - HOMEPAGE_ALLOWED_HOSTS=192.168.50.242:3000,inicio.casa.andresilva.org
     depends_on:
       - socket-proxy
 
