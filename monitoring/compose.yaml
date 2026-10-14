@@ -11,7 +11,7 @@ services:
       - TZ=Europe/Lisbon
 
   ntfy:
-    image: binwiederhier/ntfy
+    image: binwiederhier/ntfy:v2.28.0
     container_name: ntfy
     restart: unless-stopped
     command:
