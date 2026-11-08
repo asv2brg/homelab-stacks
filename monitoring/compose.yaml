@@ -1,6 +1,6 @@
 services:
   uptime-kuma:
-    image: louislam/uptime-kuma:1
+    image: louislam/uptime-kuma:1.23.17
     container_name: uptime-kuma
     restart: unless-stopped
     ports:
@@ -11,7 +11,7 @@ services:
       - TZ=Europe/Lisbon
 
   ntfy:
-    image: binwiederhier/ntfy:v2.28.0
+    image: binwiederhier/ntfy:v2.37.2
     container_name: ntfy
     restart: unless-stopped
     command:

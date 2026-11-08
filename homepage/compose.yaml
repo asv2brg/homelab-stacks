@@ -1,6 +1,6 @@
 services:
   homepage:
-    image: ghcr.io/gethomepage/homepage:v2.1.2
+    image: ghcr.io/gethomepage/homepage:v2.7.0
     container_name: homepage
     restart: unless-stopped
     ports:
@@ -19,7 +19,7 @@ services:
       - socket-proxy
 
   socket-proxy:
-    image: ghcr.io/tecnativa/docker-socket-proxy:latest
+    image: ghcr.io/tecnativa/docker-socket-proxy:v0.5.0
     container_name: homepage-socket-proxy
     restart: unless-stopped
     volumes:
