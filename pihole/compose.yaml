@@ -1,14 +1,14 @@
 services:
   unbound:
-    image: mvance/unbound-rpi:1.22.0
+    image: klutchell/unbound:1.26.2
     container_name: unbound
     restart: unless-stopped
     hostname: unbound
     networks: [dns]
     volumes:
-      - ./unbound:/opt/unbound/etc/unbound/custom.conf.d:ro
+      - ./unbound:/etc/unbound/custom.conf.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "drill @127.0.0.1 pi-hole.net || exit 1"]
+      test: ["CMD", "drill-hc", "@127.0.0.1", "cloudflare.com"]   # imagem sem shell
       interval: 30s
       timeout: 5s
       retries: 3
